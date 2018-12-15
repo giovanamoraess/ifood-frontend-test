@@ -1,0 +1,92 @@
+.excursion-list
+    padding: 1rem 3rem
+    height: 100%
+    overflow: auto
+
+    &__header
+        padding-left: 1.6rem
+
+    &__body
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+
+.playlist-card
+    overflow: hidden
+    display: flex
+    position: relative
+    flex-direction: column
+    height: 12rem
+    width: 20em
+    cursor: pointer
+    margin: 1.5rem
+    border-radius: 1rem
+    transform: translateY(0)
+    box-shadow: 0px 6px 23px -11px rgba(0,0,0,0.35)
+    animation: flipInY .5s
+    animation-fill-mode: backwards
+    animation-delay: .5s
+    backface-visibility: hidden
+    transition: all .6s ease
+
+    &:hover
+        transform: scale(1.05)
+        > .playlist-card__bg
+            object-position: center
+
+    &__bg
+        transition: object-position 1.4s ease
+        object-position: top
+        height: 100%
+        width: 100%
+        object-fit: cover
+
+    &__content
+        display: flex
+        position: absolute
+        flex-direction: column
+        height: 100%
+        width: 100%
+        padding: 1.5rem 2rem
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0, 0, 0, 0.55) 52%,rgba(0,0,0,0.70) 100%)
+        color: #fff
+
+    &__bottom
+        display: flex
+        flex: 1
+        margin-top: auto
+
+    &__bottom-left
+        display: flex
+        max-width: 30rem
+        align-items: flex-start
+        justify-content: flex-end
+        flex-direction: column
+
+    &__bottom-right
+        display: flex
+        align-items: center
+        justify-content: flex-end
+        flex-direction: column
+        margin-left: auto
+
+    &__title
+        font-weight: bold
+        font-size: 2rem
+        line-height: 2rem
+        margin-bottom: 4px
+
+    &__subtitle
+        font-size: 1.6rem
+        line-height: 1.6rem
+
+        &--border
+            text-shadow: 0px 2px 12px rgba(0, 0, 0, 0.50)
+
+    &__people-icon
+        height: 2rem
+        width: 2rem
+
+    &__people
+        font-size: 1.4rem
+        line-height: 1.4rem
