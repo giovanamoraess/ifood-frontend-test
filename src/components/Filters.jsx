@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
+import PropTypes from "prop-types";
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputBase from '@material-ui/core/InputBase';
+import { connect } from 'react-redux';
+import { getFiltersValues } from '../actions/filters';
 
 import '../styles/Filters.sass';
-
 
 const styles = theme => ({
   root: {
@@ -39,11 +35,16 @@ const styles = theme => ({
   },
 });
 
-export default class Filters extends Component {
-  
-  renderLocale() {
-    const { classes } = this.props;
+class Filters extends Component {
+  constructor(props){
+    super(props);
+  }
 
+  componentWillMount() {
+    this.props.getFiltersValues();
+  }
+
+  renderLocale(options) {
     return (
       <div>
         <FormControl variant="outlined">
@@ -52,9 +53,8 @@ export default class Filters extends Component {
               this.labelRef = ReactDOM.findDOMNode(ref);
             }}
             htmlFor="outlined-age-simple"
-            className="bg-color"
           >
-            Local
+            {options.name}
           </InputLabel>
           <Select
             onChange={this.handleChange}
@@ -65,23 +65,23 @@ export default class Filters extends Component {
                 id="outlined-age-simple"
               />
             }
-            className="bg-color"
           >
             <MenuItem value="">
-              <em>None</em>
+              <em> </em>
             </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={10}>{options.values[0].name}</MenuItem>
+            <MenuItem value={20}>{options.values[1].name}</MenuItem>
+            <MenuItem value={30}>{options.values[2].name}</MenuItem>
+            <MenuItem value={40}>{options.values[3].name}</MenuItem>
+            <MenuItem value={50}>{options.values[4].name}</MenuItem>
+            <MenuItem value={60}>{options.values[5].name}</MenuItem>
           </Select>
         </FormControl> 
       </div>
     );
   }
 
-  renderCountry() {
-    const { classes } = this.props;
-
+  renderCountry(options) {
     return (
       <div>
         <FormControl variant="outlined">
@@ -90,9 +90,8 @@ export default class Filters extends Component {
               this.labelRef = ReactDOM.findDOMNode(ref);
             }}
             htmlFor="outlined-age-simple"
-            className="bg-color"
           >
-            Local
+            { options.name }
           </InputLabel>
           <Select
             onChange={this.handleChange}
@@ -103,28 +102,30 @@ export default class Filters extends Component {
                 id="outlined-age-simple"
               />
             }
-            className="bg-color"
           >
             <MenuItem value="">
-              <em>None</em>
+              <em> </em>
             </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={10}>{options.values[0].name}</MenuItem>
+            <MenuItem value={20}>{options.values[1].name}</MenuItem>
+            <MenuItem value={30}>{options.values[2].name}</MenuItem>
+            <MenuItem value={40}>{options.values[3].name}</MenuItem>
+            <MenuItem value={50}>{options.values[4].name}</MenuItem>
+            <MenuItem value={60}>{options.values[5].name}</MenuItem>
           </Select>
         </FormControl> 
       </div>
     );
   }
 
-  renderData() {
+  renderData(options) {
   return (
     <form noValidate>
       <TextField
         id="datetime-local"
-        label="Next appointment"
+        label={ options.name }
         type="datetime-local"
-        defaultValue="2017-05-24T10:30"
+        defaultValue=" "
         InputLabelProps={{
           shrink: true,
         }}
@@ -133,49 +134,55 @@ export default class Filters extends Component {
   );
   }
 
-  renderLimit() {
+  renderLimit(options) {
     return(
       <TextField
           id="standard-number"
-          label="Limite"
+          label={ options.name }
           type="number"
           InputLabelProps={{
             shrink: true,
           }}
-          margin="normal"
         />
     );
   }
 
-  renderPage() {
+  renderPage(options) {
     return(
       <TextField
           id="standard-number"
-          label="Página"
+          label={ options.name }
           type="number"
           InputLabelProps={{
             shrink: true,
           }}
-          margin="normal"
         />
     );
   }
-  
+
   render() {
-    return (
-      <div className="div-filters">
-        {this.renderLocale()}
-        {this.renderCountry()}
-        {this.renderData()}
-        {this.renderLimit()}
-        {this.renderPage()}
-      </div>
-    )
+    const { filters } = this.props;
+    if (filters) {
+      return (
+        <div className="div-filters">
+          {this.renderLocale(filters[0])}
+          {this.renderCountry(filters[1])}
+          {this.renderData(filters[2])}
+          {this.renderLimit(filters[3])}
+          {this.renderPage(filters[4])}
+        </div>
+      )
+    }
+    return null; 
   }
-    
 }
 
-
 Filters.propTypes = {
-  classes: PropTypes.object.isRequired,
+  getFiltersValues: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = store => ({
+  filters: store.filtersReducer.filters
+});
+
+export default connect(mapStateToProps, {getFiltersValues})(Filters);
