@@ -19,8 +19,7 @@ class Authentication extends Component {
             return( 
                 <div className="home">
                     <Header />
-                    <Filters />
-                    <ListPlaylists token={access_token}s/>
+                    <ListPlaylists token={access_token}/>
                 </div>
             )
         }

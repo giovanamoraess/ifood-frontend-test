@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +8,8 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import Filters from './Filters';
 
 const styles = theme => ({
   root: {
@@ -69,35 +71,59 @@ const styles = theme => ({
   },
 });
 
-function SearchAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            SpotiFood
-          </Typography>
-          <div className={classes.grow} />
-          <div className="filter-icon">
-            <FilterListIcon />
-          </div>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Buscar..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class SearchAppBar extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      filtersVisible: false,
+    }
+  }
+
+  setFiltersVisible(visible) {
+    this.setState({filtersVisible: visible})
+  }
+
+  renderFilters(visible) {
+    return (
+      <Filters visible={visible}/>
+    )
+  }
+
+  render() {
+      const { filtersVisible } = this.state;
+      const { classes } = this.props;
+      return (
+        <div className={classes.root}>
+          <AppBar position="static" color="default">
+            <Toolbar>
+              <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+                SpotiFood
+              </Typography>
+              <div className={classes.grow} />
+              <div className="filter-icon">
+              <IconButton onClick={() => this.setFiltersVisible(!filtersVisible)}>
+                <FilterListIcon />
+              </IconButton>
+              </div>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Buscar..."
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                />
+              </div>
+            </Toolbar>
+          </AppBar>
+          {this.renderFilters(filtersVisible)}
+        </div>
+      );
+    }
 }
 
 SearchAppBar.propTypes = {

@@ -16,10 +16,6 @@ import '../styles/Filters.sass';
 class Filters extends Component {
   constructor(props){
     super(props);
-
-    this.state = {
-      visible: false
-    }
   }
 
   componentWillMount() {
@@ -142,15 +138,11 @@ class Filters extends Component {
     );
   }
 
-  filtersVisible() {
-    const { visible } = this.state;
-  }
-
   render() {
     const { filters } = this.props;
     if (filters) {
       return (
-        <Collapse isOpened={false}>
+        <Collapse isOpened={this.props.visible}>
           <div className="div-filters">
             {this.renderLocale(filters[0])}
             {this.renderCountry(filters[1])}
