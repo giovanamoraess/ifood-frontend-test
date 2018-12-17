@@ -3,9 +3,11 @@ import '../styles/Cards.sass';
 
 class PlaylistCard extends Component {
   render() {
+      console.log('prosp carrd', this.props.infos);
+      const { infos } = this.props; 
     return (
         <div className="playlist-card">
-                <img className="playlist-card__bg" src="https://placekitten.com/300/300"/>
+                <img className="playlist-card__bg" src={infos.images[0].url}/>
                 <div className="playlist-card__content">
                     <div className="playlist-card__top">
                         <h2 className="playlist-card__subtitle playlist-card__subtitle--border"></h2>

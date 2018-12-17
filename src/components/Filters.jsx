@@ -182,7 +182,7 @@ Filters.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  filters: store.filtersReducer.filters
+  filters: store.filtersReducer.filters,
 });
 
 export default connect(mapStateToProps, {getFiltersValues})(Filters);

@@ -1,17 +1,21 @@
-import { FILTERS_VALUE_REQUEST, FILTERS_VALUE_SUCCESS } from '../constants/actionTypes';
+import { PLAYLISTS_REQUEST, PLAYLISTS_SUCCESS } from '../constants/actionTypes';
 import axios from "axios";
 
-export function getFiltersValues() {
+export function getPlaylists(token) {
     return (dispatch) => {
         dispatch({
-            type: FILTERS_VALUE_REQUEST,
+            type: PLAYLISTS_REQUEST,
         });
         return axios({
             method: 'get',
-            url: 'http://www.mocky.io/v2/5a25fade2e0000213aa90776'
+            url: 'https://api.spotify.com/v1/browse/featured-playlists',
+            headers: { 
+                'Content-Type':'multipart/form-data',
+                'Authorization':`Bearer ${token}`
+            },
         }).then(({data}) => {
             dispatch({
-                type: FILTERS_VALUE_SUCCESS,
+                type: PLAYLISTS_SUCCESS,
                 data: data
             })
         }).catch((error) => {
