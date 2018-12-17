@@ -27,7 +27,6 @@ class ListPlaylists extends Component {
 
     render() {
         const { playlists } = this.props;
-        console.log('playlistss', playlists);
         return (
             <div className="list-playlist">
                 <div className="list-playlist__body">

@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import {Collapse} from 'react-collapse';
 import { connect } from 'react-redux';
 import { getFiltersValues } from '../actions/filters';
 
@@ -38,6 +39,10 @@ const styles = theme => ({
 class Filters extends Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      visible: false
+    }
   }
 
   componentWillMount() {
@@ -69,12 +74,12 @@ class Filters extends Component {
             <MenuItem value="">
               <em> </em>
             </MenuItem>
-            <MenuItem value={10}>{options.values[0].name}</MenuItem>
-            <MenuItem value={20}>{options.values[1].name}</MenuItem>
-            <MenuItem value={30}>{options.values[2].name}</MenuItem>
-            <MenuItem value={40}>{options.values[3].name}</MenuItem>
-            <MenuItem value={50}>{options.values[4].name}</MenuItem>
-            <MenuItem value={60}>{options.values[5].name}</MenuItem>
+            <MenuItem value={options.values[0].name}>Inglês (AU)</MenuItem>
+            <MenuItem value={options.values[1].name}>Alemão</MenuItem>
+            <MenuItem value={options.values[2].name}>Portugês (BR)</MenuItem>
+            <MenuItem value={options.values[3].name}>Francês</MenuItem>
+            <MenuItem value={options.values[4].name}>Inglês (US)</MenuItem>
+            <MenuItem value={options.values[5].name}>Espanhol</MenuItem>
           </Select>
         </FormControl> 
       </div>
@@ -160,17 +165,23 @@ class Filters extends Component {
     );
   }
 
+  filtersVisible() {
+    const { visible } = this.state;
+  }
+
   render() {
     const { filters } = this.props;
     if (filters) {
       return (
-        <div className="div-filters">
-          {this.renderLocale(filters[0])}
-          {this.renderCountry(filters[1])}
-          {this.renderData(filters[2])}
-          {this.renderLimit(filters[3])}
-          {this.renderPage(filters[4])}
-        </div>
+        <Collapse isOpened={false}>
+          <div className="div-filters">
+            {this.renderLocale(filters[0])}
+            {this.renderCountry(filters[1])}
+            {this.renderData(filters[2])}
+            {this.renderLimit(filters[3])}
+            {this.renderPage(filters[4])}
+          </div>
+        </Collapse>
       )
     }
     return null; 
