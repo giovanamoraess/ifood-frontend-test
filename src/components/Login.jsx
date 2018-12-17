@@ -12,11 +12,11 @@ class Login extends Component {
         const { url } = this.props;
         return (
           <div className="div-container-login">
-          <div className="div-login">
-            <button className="button-login" onClick={() => this.goToLogin(url)} >
-                <text className="label-button">Fazer login com spotify</text>
-            </button>   
-          </div>
+            <div className="div-login">
+              <button className="button-login" onClick={() => this.goToLogin(url)} >
+                  <text className="label-button">Fazer login com spotify</text>
+              </button>   
+            </div>
           </div>
         );
       }
