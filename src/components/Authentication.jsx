@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 import Header from '../components/Header';
-import Filters from '../components/Filters';
 import ListPlaylists from './ListPlaylists';
 import Login from '../components/Login';
 
 var stateKey = 'spotify_auth_state';
 
 class Authentication extends Component {
-    constructor(props){
-      super(props);
-    }
 
     render() {
         var params = this.getHashParams();

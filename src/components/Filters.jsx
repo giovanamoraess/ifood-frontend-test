@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';

@@ -23,7 +23,7 @@ const initialState = {
           if (existText) { 
             newList.push(elem);
           }
-        });
+        }, {});
         return {
           ...state,
           playlists: newList

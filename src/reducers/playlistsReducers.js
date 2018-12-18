@@ -1,4 +1,4 @@
-import { PLAYLISTS_REQUEST, PLAYLISTS_SUCCESS, PLAYLISTS_FAILED, FILTERS_API } from '../constants/actionTypes';
+import { PLAYLISTS_SUCCESS, FILTERS_API } from '../constants/actionTypes';
 
 const initialState = {
   playlists: ''
@@ -12,7 +12,6 @@ const initialState = {
           playlists: action.data.playlists
         };
       case FILTERS_API:
-      case PLAYLISTS_SUCCESS:
         return {
           ...state,
           playlists: action.data.playlists

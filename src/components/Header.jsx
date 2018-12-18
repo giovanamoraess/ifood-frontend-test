@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -109,7 +108,7 @@ class Header extends Component {
           <AppBar position="static" color="inherit">
             <Toolbar>
               <div className={classes.title} variant="h6" color="inherit">
-                <img src={logo} style={{width: '9rem'}}/>
+                <img src={logo} alt="logo" style={{width: '9rem'}}/>
               </div>
               <div className={classes.grow} />
               <div className="filter-icon">

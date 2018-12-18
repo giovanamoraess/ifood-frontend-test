@@ -5,9 +5,6 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 
 class ListPlaylists extends Component {
-    constructor(props){
-        super(props);
-    }
 
     componentWillMount() {
         const { token } = this.props; 
@@ -33,6 +30,16 @@ class ListPlaylists extends Component {
         const { playlists, filters } = this.props;
         const listPlaylists = filters && filters.length > 0 ? filters : playlists.items;
         
+        if (filters && filters.length < 1) {
+            return (
+                <div className="list-playlist">
+                    <div className="list-playlist__body">
+                        <text style={{color: '#fff'}}> Desculpe, não encontramos nenhuma playlist que corresponda a sua busca :(</text>
+                    </div>
+                </div>
+            );    
+        }
+
         return (
             <div className="list-playlist">
                 <div className="list-playlist__body">
