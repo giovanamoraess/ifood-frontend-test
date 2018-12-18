@@ -16,6 +16,7 @@ class Authentication extends Component {
         var access_token = params.access_token;
 
         if (access_token) {
+            localStorage.setItem('TOKEN', access_token);
             return( 
                 <div className="home">
                     <Header />

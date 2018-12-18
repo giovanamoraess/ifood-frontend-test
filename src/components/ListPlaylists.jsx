@@ -26,16 +26,17 @@ class ListPlaylists extends Component {
     }
 
     render() {
-        const { playlists } = this.props;
+        const { playlists, filters } = this.props;
+        const listPlaylists = filters && filters.length > 0 ? filters : playlists.items;
+        
         return (
             <div className="list-playlist">
                 <div className="list-playlist__body">
-                    {this.renderCards(playlists.items)}
+                    {this.renderCards(listPlaylists)}
                 </div>
             </div>
         );
     }
-
 }
 
 ListPlaylists.propTypes = {
@@ -43,7 +44,8 @@ ListPlaylists.propTypes = {
 };
 
 const mapStateToProps = store => ({
-    playlists: store.playlistsReducer.playlists
+    playlists: store.playlistsReducer.playlists,
+    filters: store.filtersReducer.playlists
 });
 
 export default connect(mapStateToProps, {getPlaylists})(ListPlaylists);

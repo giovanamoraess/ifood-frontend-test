@@ -10,6 +10,9 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import Filters from './Filters';
+import { connect } from 'react-redux';
+import { searchNamePlaylist } from '../actions/filters';
+
 
 const styles = theme => ({
   root: {
@@ -71,12 +74,13 @@ const styles = theme => ({
   },
 });
 
-class SearchAppBar extends Component {
+class Header extends Component {
   constructor(props){
     super(props);
 
     this.state = {
       filtersVisible: false,
+      search: ''
     }
   }
 
@@ -86,8 +90,14 @@ class SearchAppBar extends Component {
 
   renderFilters(visible) {
     return (
-      <Filters visible={visible}/>
+      <Filters visible={visible} token={this.props.token}/>
     )
+  }
+
+  searchName(value) {
+    const { playlists } = this.props;
+    this.setState({search: value})
+    this.props.searchNamePlaylist(playlists.items, value);
   }
 
   render() {
@@ -116,6 +126,8 @@ class SearchAppBar extends Component {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
+                  value={this.state.search}
+                  onChange={(event) => this.searchName(event.target.value)}
                 />
               </div>
             </Toolbar>
@@ -126,8 +138,14 @@ class SearchAppBar extends Component {
     }
 }
 
-SearchAppBar.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired,
+  searchNamePlaylist: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(SearchAppBar);
+const mapStateToProps = store => ({
+  playlists: store.playlistsReducer.playlists
+});
+
+export default connect(mapStateToProps, {searchNamePlaylist})(withStyles(styles)(Header));

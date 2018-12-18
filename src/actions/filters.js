@@ -1,4 +1,4 @@
-import { FILTERS_VALUE_REQUEST, FILTERS_VALUE_SUCCESS } from '../constants/actionTypes';
+import { FILTERS_VALUE_REQUEST, FILTERS_VALUE_SUCCESS, SEARCH_NAME_PLAYLIST } from '../constants/actionTypes';
 import axios from "axios";
 
 export function getFiltersValues() {
@@ -23,5 +23,12 @@ export function getFiltersValues() {
                 console.log("Non request error happened:", error);
             }
         });
+    }
+}
+
+export function searchNamePlaylist(playlists, text) {
+    return {
+        type: SEARCH_NAME_PLAYLIST,
+        payload: {playlists, text}
     }
 }
