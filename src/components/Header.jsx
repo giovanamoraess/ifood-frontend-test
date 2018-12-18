@@ -91,7 +91,7 @@ class Header extends Component {
 
   renderFilters(visible) {
     return (
-      <Filters visible={visible} token={this.props.token}/>
+      <Filters visible={visible} />
     )
   }
 
@@ -106,9 +106,9 @@ class Header extends Component {
       const { classes } = this.props;
       return (
         <div className={classes.root}>
-          <AppBar position="static" color="white">
+          <AppBar position="static" color="inherit">
             <Toolbar>
-              <div className={classes.title} variant="h6" color="inherit" noWrap>
+              <div className={classes.title} variant="h6" color="inherit">
                 <img src={logo} style={{width: '9rem'}}/>
               </div>
               <div className={classes.grow} />
@@ -142,7 +142,6 @@ class Header extends Component {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   searchNamePlaylist: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired
 };
 
 const mapStateToProps = store => ({

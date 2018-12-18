@@ -20,9 +20,9 @@ class ListPlaylists extends Component {
 
     renderCards(playlists){
         if(playlists){
-            return playlists.map((playlist) => {
+            return playlists.map((playlist, i) => {
                 return (
-                    <PlaylistCard infos={playlist}/>                
+                    <PlaylistCard key={i} infos={playlist}/>                
                 );
             });
         }

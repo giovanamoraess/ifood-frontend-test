@@ -60,14 +60,13 @@ class Filters extends Component {
   };
 
   handleChangeData(date) {
-    const data = moment(date).format();
-    this.setState({ timestamp: data }, this.getPlaylistsFiltered);
+    this.setState({ timestamp: date }, this.getPlaylistsFiltered);
   }
 
   getPlaylistsFiltered() {
     const { locale, country, timestamp, limit, offset } = this.state;
-    console.log('dataa', timestamp);
-    this.props.filterPlaylists(locale, country, timestamp, limit, offset);
+    let data = timestamp ? moment(timestamp).format() : null;
+    this.props.filterPlaylists(locale, country, data, limit, offset);
   }
 
   componentWillMount() {
@@ -88,7 +87,7 @@ class Filters extends Component {
           </InputLabel>
           <Select
             native
-            value={this.state.locale}
+            value={this.state.locale ? this.state.locale : ''}
             onChange={this.handleChange('locale')}
             input={
               <OutlinedInput
@@ -125,7 +124,7 @@ class Filters extends Component {
           </InputLabel>
           <Select
             native
-            value={this.state.country}
+            value={this.state.country ? this.state.country : ''}
             onChange={this.handleChange('country')}
             input={
               <OutlinedInput
@@ -151,7 +150,7 @@ class Filters extends Component {
   renderData(options, classes) {
   return (
     <form className={classes.container} noValidate>
-      <DatePicker
+     <DatePicker
         selected={this.state.timestamp}
         onChange={(event) => this.handleChangeData(event)}
         showTimeSelect
@@ -177,6 +176,7 @@ class Filters extends Component {
           }}
           style={{width: '5rem'}}
           onChange={this.handleChange('limit')}
+          value={this.state.limit ? this.state.limit : ''}
         />
     );
   }
@@ -192,6 +192,7 @@ class Filters extends Component {
           }}
           style={{width: '5rem'}}
           onChange={this.handleChange('offset')}
+          value={this.state.offset ? this.state.offset : ''}
         />
     );
   }
