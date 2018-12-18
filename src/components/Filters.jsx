@@ -12,6 +12,7 @@ import {Collapse} from 'react-collapse';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import DatePicker from "react-datepicker";
+import Button from '@material-ui/core/Button';
 import { getFiltersValues } from '../actions/filters';
 import { filterPlaylists } from '../actions/playlists';
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,6 +32,12 @@ const styles = theme => ({
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
   },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
 });
 
 class Filters extends Component {
@@ -49,8 +56,6 @@ class Filters extends Component {
   
 
   handleChange = name => event => {
-    // moment().format(); 
-    console.log('evennt', event.target.value)
     this.setState({ [name]: event.target.value }, this.getPlaylistsFiltered);
   };
 
@@ -60,9 +65,9 @@ class Filters extends Component {
   }
 
   getPlaylistsFiltered() {
-    const { locale, country, timestamp } = this.state;
+    const { locale, country, timestamp, limit, offset } = this.state;
     console.log('dataa', timestamp);
-    this.props.filterPlaylists(locale, country, timestamp);
+    this.props.filterPlaylists(locale, country, timestamp, limit, offset);
   }
 
   componentWillMount() {
@@ -149,6 +154,13 @@ class Filters extends Component {
       <DatePicker
         selected={this.state.timestamp}
         onChange={(event) => this.handleChangeData(event)}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        dateFormat="dd/MM/yyyy h:mm aa"
+        timeCaption="time"
+        placeholderText={options.name}
+        className="datepicker"
       />
     </form>
   );
@@ -164,11 +176,12 @@ class Filters extends Component {
             shrink: true,
           }}
           style={{width: '5rem'}}
+          onChange={this.handleChange('limit')}
         />
     );
   }
 
-  renderPage(options) {
+  renderOffset(options) {
     return(
       <TextField
           id="standard-number"
@@ -178,8 +191,27 @@ class Filters extends Component {
             shrink: true,
           }}
           style={{width: '5rem'}}
+          onChange={this.handleChange('offset')}
         />
     );
+  }
+
+  cleanFilters() {
+    this.setState({
+      locale: null, 
+      country: null, 
+      timestamp: null, 
+      limit: null, 
+      offset: null}, this.getPlaylistsFiltered);
+    
+  }
+
+  renderCleanFilters(classes) {
+    return (
+      <Button variant="contained" className={classes.button} onClick={() => this.cleanFilters()}>
+        Limpar
+      </Button>
+    )
   }
 
   render() {
@@ -192,7 +224,8 @@ class Filters extends Component {
             {this.renderCountry(filters[1], classes)}
             {this.renderData(filters[2], classes)}
             {this.renderLimit(filters[3], classes)}
-            {this.renderPage(filters[4], classes)}
+            {this.renderOffset(filters[4], classes)}
+            {this.renderCleanFilters(classes)}
           </div>
         </Collapse>
       )
