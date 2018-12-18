@@ -12,6 +12,10 @@ class ListPlaylists extends Component {
     componentWillMount() {
         const { token } = this.props; 
         this.props.getPlaylists(token);
+        
+        setInterval(async () => {
+            await this.props.getPlaylists(token);
+        }, 30000);
     }
 
     renderCards(playlists){

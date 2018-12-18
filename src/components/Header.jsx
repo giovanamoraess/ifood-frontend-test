@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Filters from './Filters';
 import { connect } from 'react-redux';
 import { searchNamePlaylist } from '../actions/filters';
+import logo from '../assets/logo-spotifood.png';
 
 
 const styles = theme => ({
@@ -105,11 +106,11 @@ class Header extends Component {
       const { classes } = this.props;
       return (
         <div className={classes.root}>
-          <AppBar position="static" color="default">
+          <AppBar position="static" color="white">
             <Toolbar>
-              <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                SpotiFood
-              </Typography>
+              <div className={classes.title} variant="h6" color="inherit" noWrap>
+                <img src={logo} style={{width: '9rem'}}/>
+              </div>
               <div className={classes.grow} />
               <div className="filter-icon">
               <IconButton onClick={() => this.setFiltersVisible(!filtersVisible)}>

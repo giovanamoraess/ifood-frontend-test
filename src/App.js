@@ -5,7 +5,7 @@ import Authentication from './components/Authentication';
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{backgroundColor: '#000'}}>
         <Authentication />
       </div>
     );
