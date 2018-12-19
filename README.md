@@ -3,9 +3,7 @@
 
 Teste frontend ifood 
 
-### Acesse
-
-Aplicação disponível em: [https://spotifood-giovana.herokuapp.com/]
+Aplicação disponível em: https://spotifood-giovana.herokuapp.com/
 
 ### Solução 
 
