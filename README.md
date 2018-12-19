@@ -5,7 +5,15 @@ Teste frontend ifood
 
 Aplicação disponível em: https://spotifood-giovana.herokuapp.com/
 
+
 ### Solução 
+
+O projeto foi criado utilizando `create-react-app`, para que o projeto já fosse criado, com suas estrutura básica e configurado com babel, jest, webpack, eslint, de forma fácil e prática. 
+
+`Componentes externos`
+<p> Ao longo do projeto, decidi utilizar dois componentes externos para facilitar o desenvolvimento e proporcionar uma melhor experiência:
+  - react-collapse -> para o efeito de abertura do filtro, a partir do header;
+  - react-datepicker -> para o calendário no filtro;
 
 Solução desenvolvida utilizando: 
   - React -> como lib para criação de interfaces visuais;
@@ -13,21 +21,7 @@ Solução desenvolvida utilizando:
   - Axios -> como client http;
   - Material-ui -> como UI kit;
   
-`Estrutura`
-
-|-node_modules 
-|-public
-|-src
-  --actions
-  --assets
-  --components
-  --constants
-  --reducers
-  --store
-  --styles
   
-
-
 ### Rodar projeto local 
 
 `yarn && yarn start`
