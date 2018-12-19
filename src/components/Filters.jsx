@@ -218,7 +218,7 @@ class Filters extends Component {
     if (filters) {
       return (
         <Collapse isOpened={this.props.visible}>
-          <div className="div-filters">
+          <div className="div-filters" role="filters">
             {this.renderLocale(filters[0], classes)}
             {this.renderCountry(filters[1], classes)}
             {this.renderData(filters[2], classes)}

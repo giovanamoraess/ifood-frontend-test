@@ -105,19 +105,19 @@ class Header extends Component {
       const { classes } = this.props;
       return (
         <div className={classes.root}>
-          <AppBar position="static" color="inherit">
+          <AppBar position="static" color="inherit" role="Appbar">
             <Toolbar>
               <div className={classes.title} variant="h6" color="inherit">
                 <img src={logo} alt="logo" style={{width: '9rem'}}/>
               </div>
               <div className={classes.grow} />
-              <div className="filter-icon">
+              <div className="filter-icon" role="icon filters">
               <IconButton onClick={() => this.setFiltersVisible(!filtersVisible)}>
                 <FilterListIcon />
               </IconButton>
               </div>
               <div className={classes.search}>
-                <div className={classes.searchIcon}>
+                <div className={classes.searchIcon} role="search">
                   <SearchIcon />
                 </div>
                 <InputBase

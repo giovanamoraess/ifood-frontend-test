@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
 import App from './App';
 import Authentication from './components/Authentication';
 import Login from './components/Login';
@@ -62,3 +63,4 @@ it('renders cards playlist', () => {
   ReactDOM.render(<PlaylistCard infos={mockInfos} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
